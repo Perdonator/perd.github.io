@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPS Clicker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      user-select: n; /* Prevent text selection */
+      body {
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: colorChange 20s infinite linear;
+  background: linear-gradient(-45deg, #6A0DAD, #0A5F1E, #FFD500, #005FFA);
+  background-size: 400% 400%;
+}
+
+@keyframes colorChange {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    p {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CPS Clicker</h1>
+    <button id="clickButton">Start Test</button>
+    <p id="countdown"></p>
+    <p>Clicks per second: <span id="cpsCounter">0</span></p>
+    <p id="result"></p>
+  </div>
+  <script>
+    let clicks = 0;
+    let startTime = 0;
+    let testRunning = false;
+    let cpsDecayInterval;
+    let countdownInterval;
+
+    const clickButton = document.getElementById('clickButton');
+    const cpsCounter = document.getElementById('cpsCounter');
+    const resultText = document.getElementById('result');
+    const countdownDisplay = document.getElementById('countdown');
+
+    clickButton.addEventListener('mousedown', function(event) {
+      if (!testRunning && (event.button === 0 || event.button === 2)) {
+        startTest();
+      } else if (testRunning) {
+        clicks++;
+      }
+    });
+
+    function startTest() {
+      clicks = 0;
+      startTime = performance.now();
+      testRunning = true;
+      resultText.textContent = '';
+      cpsCounter.textContent = '0';
+      startCountdown();
+      cpsDecayInterval = setInterval(updateCPS, 50); // Update CPS counter every 50 milliseconds
+      setTimeout(stopTest, 10000);
+    }
+
+    function updateCPS() {
+      const currentTime = performance.now();
+      const timeElapsed = (currentTime - startTime) / 1000; // Convert milliseconds to seconds
+      const cps = clicks / timeElapsed;
+      cpsCounter.textContent = cps.toFixed(2);
+    }
+
+    function startCountdown() {
+      let timeLeft = 10;
+      countdownDisplay.textContent = timeLeft;
+      countdownInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft >= 0) {
+          countdownDisplay.textContent = timeLeft;
+        } else {
+          clearInterval(countdownInterval);
+        }
+      }, 1000);
+    }
+
+    function stopTest() {
+      clearInterval(cpsDecayInterval);
+      clearInterval(countdownInterval);
+      testRunning = false;
+      const cps = clicks / 10; // Calculate CPS over the entire 10 seconds
+      resultText.textContent = `Your CPS: ${cps.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>

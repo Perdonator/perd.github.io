@@ -1,0 +1,73 @@
+body {
+    background-color:  rgb(34, 93, 133);
+    margin: 0px;
+}
+.larry {
+    color: rgb(100, 6, 19);
+    font-family: Verdana;
+}
+
+#myBox{
+    background-color: lightgreen;
+    width: 300px;
+    height: 300px;
+    font-size: 4.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#myButton{
+    font-size: 3rem;
+    font-family: verdana;
+    color: rgb(15, 15, 59);
+    background-color: rgb(31, 29, 29);
+    border-radius: 12px;
+}
+
+#myButton:hover{
+    background-color:  rgb(39, 37, 37);
+    color: rgb(14, 14, 46);
+}
+
+h1{
+    text-align: center;
+}
+.navbar ul{
+    list-style-type: none;
+    background-color: hsl(0, 5%, 11%);
+    padding: 0px;
+    margin: 0px;
+}
+.navbar a{
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    text-align: center;
+}
+.navbar a:hover{
+    background-color: hsl(0, 2%, 9%);
+}
+
+.beanA{
+    text-align: center;
+    background-color: rgb(15, 15, 90);
+    font-size: larger;
+    font-family: verdana;
+    color: rgb(255, 0, 0);
+    border-radius: 25%;
+    
+}
+.beanA:hover{
+    background-color: rgb(22, 22, 172);
+}
+
+a.POKI {
+    text-decoration: none;
+    color: rgb(0, 225, 255);
+}
+a.POKI:hover {
+    color: rgb(0, 126, 115);
+}
